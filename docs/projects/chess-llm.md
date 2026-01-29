@@ -67,7 +67,7 @@ While simple understanding is there, the architecture may be a limiting factor t
 
 ## Dataset Curation & Processing
 
-The power of this model comes from its synthetic training data. Instead of training on raw PGNs or scarce human commentary, it uses a **Rich Augmented Generation** pipeline to synthesize professional-grade analysis.
+The power of this model comes from its synthetic training data. Instead of training on raw PGNs or scarce human commentary, it uses a **Rich Augmented Generation** pipeline to synthesize well-informed analysis.
 
 
 
