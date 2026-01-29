@@ -1,4 +1,5 @@
 # Chess Commentary LLM
+[View on GitHub](https://github.com/umldataclub/Chess-Language-Model){ .md-button .md-button--primary }
 
 ## Vision
 
@@ -332,8 +333,8 @@ As of now, there are two architecture modes defined in the config. The best perf
 
 #### 1. Engineered Features Mode (`mode: "engineered"`)
 A lightweight, minimal mode that uses explicitly manual features.
--   **Input**: $8 \times 8$ grid of squares.
--   **Features**: Each square is represented by a **204-dimensional vector**. There are two sub-modes:
+- **Input**: $8 \times 8$ grid of squares.
+- **Features**: Each square is represented by a **204-dimensional vector**. There are two sub-modes:
     - **Main**:
         - **Position (64 dims)**: One-hot identity encoding (index $i$ is 1 for square $i$).
         - **Piece (12 dims)**: One-hot encoding for piece type (P,N,B,R,Q,K) $\times$ Color.
@@ -345,19 +346,19 @@ A lightweight, minimal mode that uses explicitly manual features.
         - **Attack Map (2 dims)**: Boolean flags indicating if the square is attacked by any White piece or any Black piece.
         - **Attack Counts (2 dims)**: The number of attackers for each color, normalized to $[0, 1]$ (divided by 5.0).
         - **Geometry (2 dims)**: Rank and File coordinates normalized to $[0, 1]$ (e.g., Rank 0 = 0.0, Rank 7 = 1.0).
-        -   **State (1 dim)**: Boolean flag indicating if the square is empty.
-        -   *(Remaining 185 dims are zero-padded)*.
+        - **State (1 dim)**: Boolean flag indicating if the square is empty.
+        - *(Remaining 185 dims are zero-padded)*.
 
--   **Adapter**: MLP projecting $204 \to 2048$ (LLM hidden dim). 
+- **Adapter**: MLP projecting $204 \to 2048$ (LLM hidden dim).
 
 #### 2. Hybrid Mode (`mode: "hybrid"`)
 Combines LC0 network features with engineered features.
--   **Input**: 
-    -   **LC0**: Hidden states from 4 transformer layers (4, 8, 12, 15).
-    -   **Engineered**: Uses the 204-dim vector. **Note**: By default, this uses the **Simplified** feature set (mostly zero-padded). To use the full **Main** feature set, set `model.engineered_features_type: "main"` in the config.
--   **Adapter**: Projects LC0 states (from 768-dim to 128-dim per layer) and concatenates them with the engineered vector (204-dim) before the final adapter MLP.
--   **Idea**: Precomputes a rich 716-dim joint representation (512 from LC0 + 204 Engineered), capturing both explicit low-level features, and LC0's abstract representations that encode deep understanding of the position.
--   **Cons**: In my initial experimentation, any training with LC0 hidden states was significantly less effective than the engineered feature set alone. Future work should focus on fine-tuning a powerful chess transformer like LC0 alongside the LM.
+- **Input**:
+    - **LC0**: Hidden states from 4 transformer layers (4, 8, 12, 15).
+    - **Engineered**: Uses the 204-dim vector. **Note**: By default, this uses the **Simplified** feature set (mostly zero-padded). To use the full **Main** feature set, set `model.engineered_features_type: "main"` in the config.
+- **Adapter**: Projects LC0 states (from 768-dim to 128-dim per layer) and concatenates them with the engineered vector (204-dim) before the final adapter MLP.
+- **Idea**: Precomputes a rich 716-dim joint representation (512 from LC0 + 204 Engineered), capturing both explicit low-level features, and LC0's abstract representations that encode deep understanding of the position.
+- **Cons**: In my initial experimentation, any training with LC0 hidden states was significantly less effective than the engineered feature set alone. Future work should focus on fine-tuning a powerful chess transformer like LC0 alongside the LM.
 
 ---
 
