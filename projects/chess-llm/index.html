@@ -1,0 +1,1268 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="A collaborative hub where students build portfolio-worthy ML projects together.">
+      
+      
+        <meta name="author" content="AI & ML Club">
+      
+      
+        <link rel="canonical" href="https://umldataclub.github.io/portfolio/projects/chess-llm/">
+      
+      
+        <link rel="prev" href="../..">
+      
+      
+        <link rel="next" href="../blockchain-analysis/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.1">
+    
+    
+      
+        <title>Chess Commentary LLM - AI & ML Club</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Outfit:300,300i,400,400i,700,700i%7CJetBrains+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Outfit";--md-code-font:"JetBrains Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="slate" data-md-color-primary="violet" data-md-color-accent="cyan">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#chess-commentary-llm" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="AI &amp; ML Club" class="md-header__button md-logo" aria-label="AI & ML Club" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17.5 15.5c0 1.11-.89 2-2 2s-2-.89-2-2 .9-2 2-2 2 .9 2 2m-9-2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.89 2-2-.89-2-2-2M23 15v3c0 .55-.45 1-1 1h-1v1c0 1.11-.89 2-2 2H5a2 2 0 0 1-2-2v-1H2c-.55 0-1-.45-1-1v-3c0-.55.45-1 1-1h1c0-3.87 3.13-7 7-7h1V5.73c-.6-.34-1-.99-1-1.73 0-1.1.9-2 2-2s2 .9 2 2c0 .74-.4 1.39-1 1.73V7h1c3.87 0 7 3.13 7 7h1c.55 0 1 .45 1 1m-2 1h-2v-2c0-2.76-2.24-5-5-5h-4c-2.76 0-5 2.24-5 5v2H3v1h2v3h14v-3h2z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            AI & ML Club
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Chess Commentary LLM
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="violet" data-md-color-accent="cyan"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="violet" data-md-color-accent="cyan"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/umldataclub/portfolio" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    umldataclub/portfolio
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="./" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Projects
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--lifted md-nav--integrated" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="AI &amp; ML Club" class="md-nav__button md-logo" aria-label="AI & ML Club" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17.5 15.5c0 1.11-.89 2-2 2s-2-.89-2-2 .9-2 2-2 2 .9 2 2m-9-2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.89 2-2-.89-2-2-2M23 15v3c0 .55-.45 1-1 1h-1v1c0 1.11-.89 2-2 2H5a2 2 0 0 1-2-2v-1H2c-.55 0-1-.45-1-1v-3c0-.55.45-1 1-1h1c0-3.87 3.13-7 7-7h1V5.73c-.6-.34-1-.99-1-1.73 0-1.1.9-2 2-2s2 .9 2 2c0 .74-.4 1.39-1 1.73V7h1c3.87 0 7 3.13 7 7h1c.55 0 1 .45 1 1m-2 1h-2v-2c0-2.76-2.24-5-5-5h-4c-2.76 0-5 2.24-5 5v2H3v1h2v3h14v-3h2z"/></svg>
+
+    </a>
+    AI & ML Club
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/umldataclub/portfolio" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    umldataclub/portfolio
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Projects
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Projects
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chess Commentary LLM
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chess Commentary LLM
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#vision" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Vision
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#current-best-iteration" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Current Best Iteration
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Current Best Iteration">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#position" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Position
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#chess-lm-generation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Chess LM Generation
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#position_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Position
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#chess-lm-generation_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Chess LM Generation
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#notes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Notes
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#limitations-and-future-work" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Limitations and Future Work
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#dataset-curation-processing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Dataset Curation &amp; Processing
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Dataset Curation &amp; Processing">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-context-engineering" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Context Engineering
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#example-training-pair" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Example Training Pair
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-execution-commands" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Execution Commands
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. Execution Commands">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#step-1-collect-raw-games" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 1: Collect Raw Games
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-2-generate-synthetic-commentary" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 2: Generate Synthetic Commentary
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-3-preprocess-for-training" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 3: Preprocess for Training
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#debugging-experimentation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Debugging / Experimentation
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#architecture" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Architecture
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Architecture">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#input-sequence-representation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Input Sequence representation
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#core-components" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Core Components
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#modes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Modes
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Modes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-engineered-features-mode-mode-engineered" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Engineered Features Mode (mode: "engineered")
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-hybrid-mode-mode-hybrid" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Hybrid Mode (mode: "hybrid")
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#training" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Training
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Training">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#configuration" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Configuration
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../blockchain-analysis/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Blockchain Analysis
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../rlgym-bot/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    RLGym Ensemble Bot
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+    <a href="https://github.com/umldataclub/portfolio/edit/master/docs/projects/chess-llm.md" title="Edit this page" class="md-content__button md-icon" rel="edit">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10 20H6V4h7v5h5v3.1l2-2V8l-6-6H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h4zm10.2-7c.1 0 .3.1.4.2l1.3 1.3c.2.2.2.6 0 .8l-1 1-2.1-2.1 1-1c.1-.1.2-.2.4-.2m0 3.9L14.1 23H12v-2.1l6.1-6.1z"/></svg>
+    </a>
+  
+  
+    
+      
+    
+    <a href="https://github.com/umldataclub/portfolio/raw/master/docs/projects/chess-llm.md" title="View source of this page" class="md-content__button md-icon">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 18c.56 0 1 .44 1 1s-.44 1-1 1-1-.44-1-1 .44-1 1-1m0-3c-2.73 0-5.06 1.66-6 4 .94 2.34 3.27 4 6 4s5.06-1.66 6-4c-.94-2.34-3.27-4-6-4m0 6.5a2.5 2.5 0 0 1-2.5-2.5 2.5 2.5 0 0 1 2.5-2.5 2.5 2.5 0 0 1 2.5 2.5 2.5 2.5 0 0 1-2.5 2.5M9.27 20H6V4h7v5h5v4.07c.7.08 1.36.25 2 .49V8l-6-6H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h4.5a8.2 8.2 0 0 1-1.23-2"/></svg>
+    </a>
+  
+
+
+<h1 id="chess-commentary-llm">Chess Commentary LLM</h1>
+<p><a class="md-button md-button--primary" href="https://github.com/umldataclub/Chess-Language-Model">View on GitHub</a></p>
+<h2 id="vision">Vision</h2>
+<p>This project explores training language models to produce chess commentary. While existing models have some ability to discuss chess, this project uniquely approaches the problem by improving the model's native ability for chess understanding, rather than relying on zero-shot, hallucination-prone generation.</p>
+<p>This project lies on two key insights:</p>
+<ol>
+<li>
+<p>By extending the model architecture, we can improve the model's capacity to understand chess positions by representing the position with regard to its key properties, instead of as raw text. Similar to how multimodal LLMs can learn visual understanding with CNN-based image adapters, we can create an informative representation of the position and train an adapter to project it into the embedding space of the LM. </p>
+</li>
+<li>
+<p>By extracting informative features (pins, forks, control, continuations, etc.) we can prompt LLMs to generate commentary as training data, with precise control over the content and style of our training dataset. This enables a consistent and predictable training signal and avoids the need for noisy and sparse human-written commentary that requires significant collection efforts.</p>
+</li>
+</ol>
+<h2 id="current-best-iteration">Current Best Iteration</h2>
+<p>Currently, the best model uses a straightforward representation of the position (see <a href="#architecture">architecture</a> section), projected into the LM context by a shallow NN. </p>
+<p>Below are some generations by the current best trained model.</p>
+<details>
+<summary><strong>Example 1: Tactical Middle Game (Click to Expand)</strong></summary>
+<h3 id="position">Position</h3>
+<p><img alt="Position" src="../../assets/chess-llm/position1.png" /></p>
+<h3 id="chess-lm-generation">Chess LM Generation</h3>
+<p>"White enjoys a slight advantage due to better central control and a more active knight on d5. Black's queen on g6 is active but also potentially vulnerable. White's pawn on b5 is advanced, and the knight on d5 is well-placed. Black's pawn structure is slightly compromised with an isolated pawn on d6. The engine suggests White can maintain this advantage with moves like Qxd5, which maintains White's initiative."</p>
+</details>
+<details>
+<summary><strong>Example 2: Forced Mate Attack (Click to Expand)</strong></summary>
+<h3 id="position_1">Position</h3>
+<p><img alt="Position" src="../../assets/chess-llm/position2.png" /></p>
+<h3 id="chess-lm-generation_1">Chess LM Generation</h3>
+<p>"White has a significant material advantage and a strong attacking position. The queen on g6 is very active, eyeing Black's kingside 
+pawns and the d4 pawn. White's rook on h3 is also well-placed, supporting the attack. Black's queen on b6 is somewhat passive, but 
+the pawn on c4 is a potential weakness. White's advantage is overwhelming, and Black's only hope is to consolidate and defend their 
+position."</p>
+</details>
+<h3 id="notes">Notes</h3>
+<p>The model demonstrates quite impressive surface level understanding. It can be described as having strong 'first glance understanding,' where it can accurately evaluate and describe key features of the position especially when one side is dominant. Broadly, it often references specific pieces correctly and may accurately elude to their significance in the position (activity, control, vulnerability, etc.). However, it lacks analytical depth and often makes innacurate proclamations about fine details, moves/pieces, or about significant positional aspects when it's not as clear. </p>
+<h3 id="limitations-and-future-work">Limitations and Future Work</h3>
+<p>As a first iteration, this model proved to be a solid foundation for future work. The training dataset consists of ~27,000 position-commentary pairs. The model was trained for 10-15 epochs before overfitting. A larger dataset would likely be beneficial. Additionally, the quality of the Gemini-generated commentary is variable and the prompt used to generate it could be improved (namely the tactic detection could be made more precise and less redundant) to produce more accurate or different styles of commentary.</p>
+<p>While simple understanding is there, the architecture may be a limiting factor to deeper understanding. The current adapter uses a small MLP to project a simple set of per-square features into the LM's embedding space. A sophisticated approach could utilize more powerful position encoders, like a pre-trained chess transformer, to better capture the complex relationships between pieces on the board and encode them for the LM. </p>
+<hr />
+<h2 id="dataset-curation-processing">Dataset Curation &amp; Processing</h2>
+<p>The power of this model comes from its synthetic training data. Instead of training on raw PGNs or scarce human commentary, it uses a <strong>Rich Augmented Generation</strong> pipeline to synthesize well-informed analysis.</p>
+<h3 id="1-context-engineering">1. Context Engineering</h3>
+<p>The <code>CommentaryGenerator</code> (<code>src/data_collection/generator.py</code>) builds a prompt for every position. It provides the ground truth necessary for accurate reasoning:</p>
+<ul>
+<li><strong>Engine Truth</strong>: Stockfish complete Principal Variations (PVs) determine the objective status of the game.</li>
+<li><strong>Human Modeling</strong>: Uses <strong>Maia Chess</strong> (a distinct neural network) to predict what humans at different ELO ratings (1100, 1500, 1900) would play. In cases where computer moves aren't very interpretable, human moves can portray explainable aspects of the position.</li>
+<li><strong>Tactical Detector</strong>: A custom analysis module explicitly identifies pins, forks, skewers, and discovered attacks in the current position and in future stockfish/maia variations, explicitly highlighting imminent or likely tactics in the position.</li>
+<li><strong>Semantic Features</strong>: Calculates material imbalances, pawn structures (isolated/doubled), king safety, and center control metrics.</li>
+</ul>
+<h3 id="example-training-pair">Example Training Pair</h3>
+<details>
+<summary><strong>Image and Generation</strong></summary>
+<!-- TODO: Add chess position image -->
+<p><img alt="alt text" src="../../assets/chess-llm/gemini_position1.png" /></p>
+<p><strong>Generated Commentary:</strong></p>
+<p>"This is a volatile and highly tactical middlegame where both kings are dangerously exposed in the center. White's pieces are aggressively posted, particularly the Queen on d5 and the Bishop on e4, which exert tremendous pressure. Despite what the material balance suggests (Black seems to have an extra piece or exchange), White's attack against the uncastled Black king is the overriding concern. Black's primary asset is the annoying bishop on g4, which keeps the White king pinned down on d1. White needs an immediate, decisive tactical breakthrough, likely involving Bf3 or f3, to resolve the pin and exploit the exposed Black monarch before Black can consolidate the material advantage or bring the trapped knight on a1 into play."</p>
+</details>
+<details>
+<summary><strong>Prompt</strong></summary>
+<p><strong>Prompt</strong>
+<div class="highlight"><pre><span></span><code>GENERATE CHESS POSITION COMMENTARY
+
+POSITION CONTEXT:
+[FEN]: r3kb1r/ppp1q2p/6p1/3Q4/4B1b1/3P4/PP3PPP/nNBKR3 w - - 2 15
+[Side to Move]: White
+[Move Number]: 15
+
+CURRENT POSITION TACTICS:
+  - PIN: White queen on d5 pins Black pawn on b7 to Black rook on a8
+
+
+DETAILED SEMANTIC DATA:
+[Material Balance]: -4 (Positive = White advantage)
+[Center Control]: White controls 4 squares, Black controls 2 squares.
+[Pawn Structure]:
+  - White: {&#39;count&#39;: 6, &#39;doubled&#39;: 0, &#39;isolated&#39;: 1}
+  - Black: {&#39;count&#39;: 5, &#39;doubled&#39;: 0, &#39;isolated&#39;: 0}
+[King Safety]:
+  - White: Shield: 0 pawns, Castled: False
+  - Black: Shield: 0 pawns, Castled: False
+
+
+BOARD TENSIONS:
+[White Attacks]:
+  - White bishop on e4 attacks Black&#39;s pawn on g6
+  - White queen on d5 attacks Black&#39;s pawn on b7
+
+[Black Attacks]:
+  - Black bishop on g4 attacks White&#39;s king on d1
+  - Black queen on e7 attacks White&#39;s bishop on e4
+
+[White Defends]:
+  - White rook on e1 defends king on d1
+  - White rook on e1 defends bishop on e4
+  - White pawn on d3 defends bishop on e4
+  - White queen on d5 defends bishop on e4
+
+[Black Defends]:
+  - Black pawn on h7 defends pawn on g6
+
+ENGINE ANALYSIS (top 3 continuations from this position):
+  1. Bf3 [Eval: +3.73]
+     Line: 15. Bf3 Rd8 16. Rxe7+ Bxe7 17. Qxb7 Rxd3+ 18. Bd2 Bxf3+
+     → PIN after Bf3: White rook on e1 pins Black queen on e7 to Black king on e8
+     → PIN after Bf3: Black bishop on g4 pins White bishop on f3 to White king on d1
+     → DISCOVERED_ATTACK after Bf3: White rook on e1 attacks Black queen on e7 (revealed)
+     → SKEWER after Rd8: Black rook on d8 skewers White queen on d5, exposing White pawn on d3
+     → PIN after Rxe7+: White rook on e7 pins Black pawn on c7 to Black pawn on b7
+     → PIN after Qxb7: Black rook on d8 pins White pawn on d3 to White king on d1
+     → FORK after Rxd3+: Black rook on d3 forks White king on d1, White bishop on f3
+  2. f3 [Eval: +1.31]
+     Line: 15. f3 Rd8 16. Qb5+ c6 17. Bxc6+ bxc6 18. Rxe7+ Bxe7
+     → PIN after f3: Black bishop on g4 pins White pawn on f3 to White king on d1
+     → PIN after Qb5+: Black rook on d8 pins White pawn on d3 to White king on d1
+     → DISCOVERED_ATTACK after Qb5+: White bishop on e4 attacks Black pawn on b7 (revealed)
+     → PIN after c6: White queen on b5 pins Black pawn on c6 to Black king on e8
+     → PIN after Bxc6+: White rook on e1 pins Black queen on e7 to Black king on e8
+     → BATTERY_ATTACK after Bxc6+: Moving White bishop on c6 discovers attack by White queen on Black king (e8)
+     → DISCOVERED_ATTACK after Bxc6+: White rook on e1 attacks Black queen on e7 (revealed)
+     → PIN after bxc6: White queen on b5 pins Black pawn on c6 to Black king on e8
+  3. Re2 [Eval: -2.31]
+     Line: 15. Re2 Bxe2+ 16. Kxe2 Nc2 17. Qxb7 Nd4+ 18. Kf1 Rd8
+     → PIN after Re2: Black bishop on g4 pins White rook on e2 to White king on d1
+     → PIN after Kxe2: Black queen on e7 pins White bishop on e4 to White king on e2
+     → BATTERY_ATTACK after Nc2: Moving White pawn on d3 discovers attack by White bishop on Black knight (c2)
+     → BATTERY_ATTACK after Qxb7: Moving White queen on b7 discovers attack by White bishop on Black rook (a8)
+     → BATTERY_ATTACK after Qxb7: Moving Black pawn on c7 discovers attack by Black queen on White queen (b7)
+
+
+HUMANLIKE LINES (typical moves by players at different skill levels):
+  [1100 ELO player moves]:
+    f3 (69% likely): 15. f3 Rd8 16. Qb5+ c6 17. Bxc6+ bxc6 18. Rxe7+ Bxe7
+      -&gt; PIN after f3: Black bishop on g4 pins White pawn on f3 to White king on d1
+      -&gt; PIN after Qb5+: Black rook on d8 pins White pawn on d3 to White king on d1
+      -&gt; DISCOVERED_ATTACK after Qb5+: White bishop on e4 attacks Black pawn on b7 (revealed)
+      -&gt; PIN after c6: White queen on b5 pins Black pawn on c6 to Black king on e8
+      -&gt; PIN after Bxc6+: White rook on e1 pins Black queen on e7 to Black king on e8
+      -&gt; BATTERY_ATTACK after Bxc6+: Moving White bishop on c6 discovers attack by White queen on Black king (e8)
+      -&gt; DISCOVERED_ATTACK after Bxc6+: White rook on e1 attacks Black queen on e7 (revealed)
+      -&gt; PIN after bxc6: White queen on b5 pins Black pawn on c6 to Black king on e8
+    Bf3 (26% likely): 15. Bf3 Rd8 16. Rxe7+ Bxe7 17. Qxb7 Rxd3+ 18. Bd2 Bxf3+
+      -&gt; PIN after Bf3: White rook on e1 pins Black queen on e7 to Black king on e8
+      -&gt; PIN after Bf3: Black bishop on g4 pins White bishop on f3 to White king on d1
+      -&gt; DISCOVERED_ATTACK after Bf3: White rook on e1 attacks Black queen on e7 (revealed)
+      -&gt; SKEWER after Rd8: Black rook on d8 skewers White queen on d5, exposing White pawn on d3
+      -&gt; PIN after Rxe7+: White rook on e7 pins Black pawn on c7 to Black pawn on b7
+      -&gt; PIN after Qxb7: Black rook on d8 pins White pawn on d3 to White king on d1
+      -&gt; FORK after Rxd3+: Black rook on d3 forks White king on d1, White bishop on f3
+    Kd2 (5% likely): 15. Kd2 Qb4+ 16. Nc3 Bh6+ 17. Re3 Bxe3+ 18. fxe3
+      -&gt; FORK after Qb4+: Black queen on b4 forks White king on d2, White bishop on e4
+      -&gt; PIN after Qb4+: Black queen on b4 pins White pawn on b2 to White knight on b1
+      -&gt; SKEWER after Qb4+: Black queen on b4 skewers White king on d2, exposing White rook on e1
+      -&gt; BATTERY_ATTACK after Qb4+: Moving White bishop on e4 discovers attack by White rook on Black king (e8)
+      -&gt; PIN after Nc3: Black queen on b4 pins White knight on c3 to White king on d2
+      -&gt; BATTERY_ATTACK after Nc3: Moving White bishop on c1 discovers attack by White rook on Black knight (a1)
+      -&gt; BATTERY_ATTACK after Bh6+: Moving White king on d2 discovers attack by White bishop on Black bishop (h6)
+      -&gt; PIN after Re3: Black bishop on h6 pins White rook on e3 to White king on d2
+      -&gt; SKEWER after Bxe3+: Black bishop on e3 skewers White king on d2, exposing White bishop on c1
+      -&gt; BATTERY_ATTACK after Bxe3+: Moving White king on d2 discovers attack by White bishop on Black bishop (e3)
+
+  [1500 ELO player moves]:
+    f3 (67% likely): 15. f3 Rd8 16. Qb5+ c6 17. Bxc6+ bxc6 18. Rxe7+ Bxe7
+      -&gt; PIN after f3: Black bishop on g4 pins White pawn on f3 to White king on d1
+      -&gt; PIN after Qb5+: Black rook on d8 pins White pawn on d3 to White king on d1
+      -&gt; DISCOVERED_ATTACK after Qb5+: White bishop on e4 attacks Black pawn on b7 (revealed)
+      -&gt; PIN after c6: White queen on b5 pins Black pawn on c6 to Black king on e8
+      -&gt; PIN after Bxc6+: White rook on e1 pins Black queen on e7 to Black king on e8
+      -&gt; BATTERY_ATTACK after Bxc6+: Moving White bishop on c6 discovers attack by White queen on Black king (e8)
+      -&gt; DISCOVERED_ATTACK after Bxc6+: White rook on e1 attacks Black queen on e7 (revealed)
+      -&gt; PIN after bxc6: White queen on b5 pins Black pawn on c6 to Black king on e8
+    Bf3 (29% likely): 15. Bf3 Rd8 16. Rxe7+ Bxe7 17. Qxb7 Rxd3+ 18. Bd2 Bxf3+
+      -&gt; PIN after Bf3: White rook on e1 pins Black queen on e7 to Black king on e8
+      -&gt; PIN after Bf3: Black bishop on g4 pins White bishop on f3 to White king on d1
+      -&gt; DISCOVERED_ATTACK after Bf3: White rook on e1 attacks Black queen on e7 (revealed)
+      -&gt; SKEWER after Rd8: Black rook on d8 skewers White queen on d5, exposing White pawn on d3
+      -&gt; PIN after Rxe7+: White rook on e7 pins Black pawn on c7 to Black pawn on b7
+      -&gt; PIN after Qxb7: Black rook on d8 pins White pawn on d3 to White king on d1
+      -&gt; FORK after Rxd3+: Black rook on d8 forks White king on d1, White bishop on f3
+
+  [1900 ELO player moves]:
+    f3 (72% likely): 15. f3 Rd8 16. Qb5+ c6 17. Bxc6+ bxc6 18. Rxe7+ Bxe7
+      -&gt; PIN after f3: Black bishop on g4 pins White pawn on f3 to White king on d1
+      -&gt; PIN after Qb5+: Black rook on d8 pins White pawn on d3 to White king on d1
+      -&gt; DISCOVERED_ATTACK after Qb5+: White bishop on e4 attacks Black pawn on b7 (revealed)
+      -&gt; PIN after c6: White queen on b5 pins Black pawn on c6 to Black king on e8
+      -&gt; PIN after Bxc6+: White rook on e1 pins Black queen on e7 to Black king on e8
+      -&gt; BATTERY_ATTACK after Bxc6+: Moving White bishop on c6 discovers attack by White queen on Black king (e8)
+      -&gt; DISCOVERED_ATTACK after Bxc6+: White rook on e1 attacks Black queen on e7 (revealed)
+      -&gt; PIN after bxc6: White queen on b5 pins Black pawn on c6 to Black king on e8
+    Bf3 (26% likely): 15. Bf3 Rd8 16. Rxe7+ Bxe7 17. Qxb7 Rxd3+ 18. Bd2 Bxf3+
+      -&gt; PIN after Bf3: White rook on e1 pins Black queen on e7 to Black king on e8
+      -&gt; PIN after Bf3: Black bishop on g4 pins White bishop on f3 to White king on d1
+      -&gt; DISCOVERED_ATTACK after Bf3: White rook on e1 attacks Black queen on e7 (revealed)
+      -&gt; SKEWER after Rd8: Black rook on d8 skewers White queen on d5, exposing White pawn on d3
+      -&gt; PIN after Rxe7+: White rook on e7 pins Black pawn on c7 to Black pawn on b7
+      -&gt; PIN after Qxb7: Black rook on d8 pins White pawn on d3 to White king on d1
+      -&gt; FORK after Rxd3+: Black rook on d3 forks White king on d1, White bishop on f3
+
+
+
+TASK:
+Generate chess position commentary:
+1. Commentary: Overall positional assessment - key factors, imbalances, and evaluation
+
+GUIDELINES:
+- Your purpose is to generate intuitive descriptions of chess positions as curation of a chess-language model training dataset
+- The context given should be used to deduce information about the position. Avoid baseless inferences and elaborations. 
+- You should give humanlike commentary. Depending on your ability to produce commentary on the particular position, it may reflect observations of a player at any skill level. But should have a subjective feel, and should not directly reference or imply access to any of these artifacts or engine evaluations. 
+- The &quot;Humanlike Tactical Lines&quot; section shows moves that typical players might play and the resulting tactical threats (forks, pins, discovered attacks). Use this along with the engine analysis to understand the most impactful tactics in the position that are likely to occur.
+- Focus on intuitive understanding: what are the key pieces, active/potential threats, and imbalances in the position? In sharp positions, prioritize the most imminent tactics that occur in the sequences.
+
+
+OUTPUT FORMAT (Strict JSON):
+{
+  &quot;fen&quot;: &quot;r3kb1r/ppp1q2p/6p1/3Q4/4B1b1/3P4/PP3PPP/nNBKR3 w - - 2 15&quot;,
+  &quot;samples&quot;: [
+    {
+      &quot;commentary&quot;: &quot;...&quot;
+    },
+  ]
+}
+</code></pre></div></p>
+</details>
+<hr />
+<h3 id="2-execution-commands">2. Execution Commands</h3>
+<h4 id="step-1-collect-raw-games">Step 1: Collect Raw Games</h4>
+<p>Download games from Lichess (filtered by ELO).
+<div class="highlight"><pre><span></span><code>python<span class="w"> </span>src/data_collection/game_collector.py<span class="w"> </span>--count<span class="w"> </span><span class="m">5000</span><span class="w"> </span>--min-elo<span class="w"> </span><span class="m">2000</span><span class="w"> </span>--output-dir<span class="w"> </span>data/games
+</code></pre></div></p>
+<h4 id="step-2-generate-synthetic-commentary">Step 2: Generate Synthetic Commentary</h4>
+<p>Run the extraction and generation pipeline. This reads PGNs, analyzes positions, and queries Google Gemini for commentary.
+<div class="highlight"><pre><span></span><code><span class="c1"># --batch uses async IO for faster API calls</span>
+<span class="c1"># --thinking enables Gemini&#39;s &quot;Thinking Mode&quot; for deeper reasoning</span>
+python<span class="w"> </span>src/data_collection/gatherer.py<span class="w"> </span>--input<span class="w"> </span>data/games/my_games.pgn<span class="w"> </span>--output<span class="w"> </span>output.jsonl<span class="w"> </span>--batch<span class="w"> </span>--thinking<span class="w"> </span>-1
+</code></pre></div></p>
+<h4 id="step-3-preprocess-for-training">Step 3: Preprocess for Training</h4>
+<p>Convert the raw JSONL data into PyTorch tensors.
+<code>--skip-lc0</code> is recommended unless you want to experiment with precomputed lc0 embeddings.
+<div class="highlight"><pre><span></span><code>python<span class="w"> </span>src/data_collection/preprocess_data.py<span class="w"> </span>--input<span class="w"> </span>output.jsonl<span class="w"> </span>--output<span class="w"> </span>data/dataset<span class="w"> </span>--skip-lc0
+</code></pre></div></p>
+<h4 id="debugging-experimentation">Debugging / Experimentation</h4>
+<p>To visualize the generation for a single position (with GUI):
+<div class="highlight"><pre><span></span><code>python<span class="w"> </span>src/data_collection/experiment.py<span class="w"> </span>--pgn<span class="w"> </span>test_game.pgn<span class="w"> </span>--ply<span class="w"> </span><span class="m">21</span><span class="w"> </span>--model<span class="w"> </span><span class="s2">&quot;Google: gemini-2.5-flash-lite&quot;</span>
+</code></pre></div></p>
+<hr />
+<h2 id="architecture">Architecture</h2>
+<p>The system currently uses a <strong>Position Adapter</strong> architecture to ground the LLM in the chess position. Each square is transformed into a set of features, which is passed through an MLP adapter and projected into the language model's 2048-dimension embedding space. The language model uses these embeddings (1 side token + 64 square tokens) as context for its prediction. e.g:</p>
+<h3 id="input-sequence-representation">Input Sequence representation</h3>
+<p>The model receives a concatenated sequence of embeddings:</p>
+<p><code>[Side Token]</code> + <code>[64 Square Tokens]</code> + <code>[Prompt Tokens]</code> <span class="arithmatex">\(\to\)</span> <code>[Commentary]</code></p>
+<ol>
+<li><strong>Side Token</strong> (1 embedding): Encodes side-to-move (White/Black).</li>
+<li><strong>Square Tokens</strong> (64 embeddings): Represents the board state from A1 to H8.</li>
+<li><strong>Prompt Tokens</strong>: The chat template applied to the prompt.
+    <div class="highlight"><pre><span></span><code>&lt;|user|&gt;
+Provide commentary on this chess position.&lt;/s&gt;
+&lt;|assistant|&gt;
+</code></pre></div></li>
+</ol>
+<h3 id="core-components">Core Components</h3>
+<ol>
+<li><strong>Base Model</strong>: <code>TinyLlama-1.1B-Chat</code>.</li>
+<li><strong>Fine-Tuning</strong>: LoRA (Low-Rank Adaptation) on attention modules (<code>q_proj</code>, <code>v_proj</code>, <code>k_proj</code>, <code>o_proj</code>) and optionally MLP modules (<code>gate_proj</code>, <code>up_proj</code>, <code>down_proj</code>).</li>
+<li><strong>Adapter</strong>: A specialized adapter projects the board state into the LLM's embedding space as prefix tokens.</li>
+</ol>
+<h3 id="modes">Modes</h3>
+<p>As of now, there are two architecture modes defined in the config. The best performing architecture used the <code>engineered</code> mode with the <code>main</code> sub-mode. The <code>simplified</code> sub-mode is not currently used:</p>
+<h4 id="1-engineered-features-mode-mode-engineered">1. Engineered Features Mode (<code>mode: "engineered"</code>)</h4>
+<p>A lightweight, minimal mode that uses explicitly manual features.</p>
+<ul>
+<li>
+<p><strong>Input</strong>: <span class="arithmatex">\(8 \times 8\)</span> grid of squares.</p>
+</li>
+<li>
+<p><strong>Features</strong>: Each square is represented by a <strong>204-dimensional vector</strong>. There are two sub-modes:</p>
+<ul>
+<li>
+<p><strong>Main</strong>:</p>
+<ul>
+<li><strong>Position (64 dims)</strong>: One-hot identity encoding (index <span class="arithmatex">\(i\)</span> is 1 for square <span class="arithmatex">\(i\)</span>).</li>
+<li><strong>Piece (12 dims)</strong>: One-hot encoding for piece type (P,N,B,R,Q,K) <span class="arithmatex">\(\times\)</span> Color.</li>
+<li><strong>Attack Vector (64 dims)</strong>: Boolean vector where index <span class="arithmatex">\(i\)</span> is 1 if the piece on this square attacks square <span class="arithmatex">\(i\)</span>.</li>
+<li><strong>Defense Vector (64 dims)</strong>: Boolean vector where index <span class="arithmatex">\(i\)</span> is 1 if the piece on this square defends a friendly piece on square <span class="arithmatex">\(i\)</span>.</li>
+<li><strong>Total</strong>: 204 dimensions.</li>
+</ul>
+</li>
+<li>
+<p><strong>Simplified</strong>:</p>
+<ul>
+<li><strong>Piece Presence (12 dims)</strong>: One-hot encoding for piece type (P,N,B,R,Q,K) <span class="arithmatex">\(\times\)</span> Color (White, Black). e.g., White Pawn = <code>[1, 0, ...]</code>.</li>
+<li><strong>Attack Map (2 dims)</strong>: Boolean flags indicating if the square is attacked by any White piece or any Black piece.</li>
+<li><strong>Attack Counts (2 dims)</strong>: The number of attackers for each color, normalized to <span class="arithmatex">\([0, 1]\)</span> (divided by 5.0).</li>
+<li><strong>Geometry (2 dims)</strong>: Rank and File coordinates normalized to <span class="arithmatex">\([0, 1]\)</span> (e.g., Rank 0 = 0.0, Rank 7 = 1.0).</li>
+<li><strong>State (1 dim)</strong>: Boolean flag indicating if the square is empty.</li>
+<li><em>(Remaining 185 dims are zero-padded)</em>.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Adapter</strong>: MLP projecting <span class="arithmatex">\(204 \to 2048\)</span> (LLM hidden dim).</p>
+</li>
+</ul>
+<h4 id="2-hybrid-mode-mode-hybrid">2. Hybrid Mode (<code>mode: "hybrid"</code>)</h4>
+<p>Combines LC0 network features with engineered features.</p>
+<ul>
+<li>
+<p><strong>Input</strong>:</p>
+<ul>
+<li><strong>LC0</strong>: Hidden states from 4 transformer layers (4, 8, 12, 15).</li>
+<li><strong>Engineered</strong>: Uses the 204-dim vector. <strong>Note</strong>: By default, this uses the <strong>Simplified</strong> feature set (mostly zero-padded). To use the full <strong>Main</strong> feature set, set <code>model.engineered_features_type: "main"</code> in the config.</li>
+</ul>
+</li>
+<li>
+<p><strong>Adapter</strong>: Projects LC0 states (from 768-dim to 128-dim per layer) and concatenates them with the engineered vector (204-dim) before the final adapter MLP.</p>
+</li>
+<li>
+<p><strong>Idea</strong>: Precomputes a rich 716-dim joint representation (512 from LC0 + 204 Engineered), capturing both explicit low-level features, and LC0's abstract representations that encode deep understanding of the position.</p>
+</li>
+<li>
+<p><strong>Cons</strong>: In my initial experimentation, any training with LC0 hidden states was significantly less effective than the engineered feature set alone. Future work should focus on fine-tuning a powerful chess transformer like LC0 alongside the LM.</p>
+</li>
+</ul>
+<hr />
+<h2 id="training">Training</h2>
+<p>The model interacts with the chess encoding via a configuration-driven training script.</p>
+<h3 id="configuration">Configuration</h3>
+<p>Training is controlled via YAML configuration files in <code>configs/</code>.</p>
+<p>Example command:
+<div class="highlight"><pre><span></span><code>python<span class="w"> </span>src/training/train.py<span class="w"> </span>--config<span class="w"> </span>configs/example.yaml
+</code></pre></div></p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.tabs", "navigation.tabs.sticky", "navigation.indexes", "navigation.instant", "navigation.tracking", "toc.integrate", "content.code.copy", "content.action.edit", "content.action.view"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+        <script src="../../javascripts/mathjax.js"></script>
+      
+        <script src="https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>
