@@ -1,0 +1,65 @@
+site_name: AI & ML Club
+site_url: https://example.com/
+site_author: AI & ML Club
+site_description: A collaborative hub where students build portfolio-worthy ML projects together.
+
+repo_name: umldataclub/portfolio
+repo_url: https://github.com/umldataclub/portfolio
+
+theme:
+  name: material
+  custom_dir: docs/overrides
+  palette:
+    # Palette toggle for dark mode
+    - scheme: slate
+      primary: violet
+      accent: cyan
+      toggle:
+        icon: material/brightness-4
+        name: Switch to light mode
+    # Palette toggle for light mode
+    - scheme: default
+      primary: violet
+      accent: cyan
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
+  font:
+    text: Outfit
+    code: JetBrains Mono
+  features:
+    - navigation.tabs
+    - navigation.tabs.sticky
+    - navigation.indexes
+    - navigation.instant
+    - navigation.tracking
+    - toc.integrate
+    - content.code.copy
+    - content.action.edit
+    - content.action.view
+  icon:
+    logo: material/robot-outline
+
+extra_css:
+  - stylesheets/extra.css
+
+markdown_extensions:
+  - admonition
+  - pymdownx.details
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
+  - attr_list
+  - md_in_html
+  - pymdownx.emoji:
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
+
+nav:
+  - Home: index.md
+  - Projects:
+    - Chess Commentary LLM: projects/chess-llm.md
+    - Blockchain Analysis: projects/blockchain-analysis.md
+    - RLGym Ensemble Bot: projects/rlgym-bot.md
