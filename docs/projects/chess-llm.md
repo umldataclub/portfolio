@@ -378,6 +378,6 @@ Training is controlled via YAML configuration files in `configs/`.
 
 Example command:
 ```bash
-python src/training/train.py --config configs/default_hybrid.yaml
+python src/training/train.py --config configs/example.yaml
 ```
 
