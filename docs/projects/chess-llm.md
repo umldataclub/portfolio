@@ -7,7 +7,7 @@ This project explores training language models to produce chess commentary. Whil
 
 This project lies on two key insights:
 
-1. With an architectural approach, we can improve the model's capacity to understand chess positions by representing the position with regard to it's key properties, instead of as raw text. Similar to how multimodal LLMs can learn visual understanding with CNN-based image adapters, we can create an informative representation of the position and train an adapter to project it into the embedding space of the LM. 
+1. By extending the model architecture, we can improve the model's capacity to understand chess positions by representing the position with regard to its key properties, instead of as raw text. Similar to how multimodal LLMs can learn visual understanding with CNN-based image adapters, we can create an informative representation of the position and train an adapter to project it into the embedding space of the LM. 
 
 2. By extracting informative features (pins, forks, control, continuations, etc.) we can prompt LLMs to generate commentary as training data, with precise control over the content and style of our training dataset. This enables a consistent and predictable training signal and avoids the need for noisy and sparse human-written commentary that requires significant collection efforts.
 
@@ -380,6 +380,4 @@ Example command:
 ```bash
 python src/training/train.py --config configs/default_hybrid.yaml
 ```
-
-See [TRAINING_CONFIG.md](TRAINING_CONFIG.md) for detailed configuration options.
 
