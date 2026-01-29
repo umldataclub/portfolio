@@ -120,3 +120,6 @@ venv.bak/
 
 # mkdocs documentation
 /site
+
+# Exclude local project directories
+Chess_transformer/
